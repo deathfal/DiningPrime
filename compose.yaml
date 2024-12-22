@@ -3,10 +3,11 @@ services:
     image: ${IMAGES_PREFIX:-}app-php
     restart: unless-stopped
     environment:
-      SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
+      SERVER_NAME: localhost
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
-      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@db:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}&charset=${POSTGRES_CHARSET:-utf8}
+      # DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-!ChangeMe!}@db:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-15}&charset=${POSTGRES_CHARSET:-utf8}
+      DATABASE_URL: ${DATABASE_URL}
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
       MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME:-localhost}/.well-known/mercure}
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
@@ -17,23 +18,23 @@ services:
       - caddy_config:/config
     ports:
       - target: 80
-        published: ${HTTP_PORT:-80}
+        published: ${HTTP_PORT:-8080}
         protocol: tcp
       - target: 443
-        published: ${HTTPS_PORT:-666}
+        published: ${HTTPS_PORT:-8443}
         protocol: tcp
       - target: 443
-        published: ${HTTP3_PORT:-443}
+        published: ${HTTP3_PORT:-8443}
         protocol: udp
 
   db:
     image: postgres:15
-    container_name: soundwave-db
+    container_name: diningprime-db
     restart: unless-stopped
     environment:
       POSTGRES_USER: adam
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: soundwave
+      POSTGRES_DB: diningprime
       POSTGRES_CHARSET: utf8
     volumes:
       - db_data:/var/lib/postgresql/data
@@ -42,7 +43,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: soundwave-pgadmin
+    container_name: diningprime-pgadmin
     restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: adamgarchi@gmail.com
