@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
             $plainPassword = $form->get('plainPassword')->getData();
 
             // Set user as unverified
-            $user->setVerified(false);
+            $user->setIsVerified(false);
 
             // Assign default role if none exists
             $user->setRoles(['ROLE_USER']);

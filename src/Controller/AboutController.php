@@ -11,6 +11,11 @@ class AboutController extends AbstractController
     #[Route('/about', name: 'app_about')]
     public function index(): Response
     {
+
+        if ($this->isGranted('ROLE_BANNED')) {
+            return $this->redirectToRoute('app_banned');
+        }
+
         return $this->render('about/index.html.twig', [
             'controller_name' => 'AboutController',
         ]);

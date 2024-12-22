@@ -37,8 +37,9 @@ security:
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/verify/email, roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
-        - { path: ^/, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/banned, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY, allow_if: "not 'ROLE_BANNED' in role_names" }
 
         # - { path: ^/, roles: IS_AUTHENTICATED_FULLY, allow_if: "is_granted('IS_AUTHENTICATED_FULLY') and user.isVerified()" }
 when@test:

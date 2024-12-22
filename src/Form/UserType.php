@@ -1,12 +1,16 @@
 <?php
 
+// src/Form/UserType.php
 namespace App\Form;
+
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType; // Import ChoiceType
 
 class UserType extends AbstractType
 {
@@ -19,20 +23,27 @@ class UserType extends AbstractType
                     'User' => 'ROLE_USER',
                     'Admin' => 'ROLE_ADMIN',
                 ],
-                'expanded' => true, // Checkboxes instead of a dropdown
-                'multiple' => true, // Allow selecting multiple roles
+                'expanded' => true,
+                'multiple' => true,
             ])
-            ->add('password')
+            ->add('plainPassword', PasswordType::class, [
+                'mapped' => false,
+                'required' => $options['is_new'],
+                'attr' => ['autocomplete' => 'new-password'],
+            ])
             ->add('firstName')
             ->add('lastName')
-            ->add('isVerified')
-        ;
+            ->add('isVerified', CheckboxType::class, [
+                'label' => 'Is Verified',
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'is_new' => false, // Default for new or existing users
         ]);
     }
 }
