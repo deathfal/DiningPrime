@@ -1,0 +1,13 @@
+<!-- templates/partials/header.html.twig -->
+<header>
+    <nav>
+        <ul>
+            {% if app.user %}
+                <li>Welcome, {{ app.user.firstName }} {{ app.user.lastName }}</li>
+                <li><a href="{{ path('app_logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ path('app_login') }}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
