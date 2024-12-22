@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Dessert{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Edit Dessert</h1>
+
+    <div class="card bg-dark text-light shadow-lg">
+        <div class="card-body">
+            {{ include('dessert/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+    </div>
+
+    <a href="{{ path('app_dessert_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+
+    <div class="mt-3">
+        {{ include('dessert/_delete_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

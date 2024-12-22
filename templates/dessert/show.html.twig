@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dessert Details{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Dessert Details</h1>
+
+    <div class="card bg-dark text-light shadow-lg">
+        <div class="card-body">
+            <table class="table table-dark table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">ID</th>
+                        <td>{{ dessert.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ dessert.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Description</th>
+                        <td>{{ dessert.description }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Price</th>
+                        <td>{{ dessert.price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a href="{{ path('app_dessert_index') }}" class="btn btn-secondary">Back to list</a>
+            <a href="{{ path('app_dessert_edit', {'id': dessert.id}) }}" class="btn btn-warning">Edit</a>
+            {{ include('dessert/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dish Index{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Dish Index</h1>
+        <a href="{{ path('app_dish_new') }}" class="btn btn-success mb-3">Create New Dish</a>
+        <table class="table table-bordered table-striped table-dark">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dish in dishes %}
+                    <tr>
+                        <td>{{ dish.id }}</td>
+                        <td>{{ dish.name }}</td>
+                        <td>{{ dish.description }}</td>
+                        <td>{{ dish.price }}</td>
+                        <td>
+                            <a href="{{ path('app_dish_show', {'id': dish.id}) }}" class="btn btn-primary btn-sm">Show</a>
+                            <a href="{{ path('app_dish_edit', {'id': dish.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                            {{ include('dish/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

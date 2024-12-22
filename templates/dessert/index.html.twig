@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dessert Index{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Dessert Index</h1>
+    <a href="{{ path('app_dessert_new') }}" class="btn btn-success mb-3">Create new Dessert</a>
+    <table class="table table-bordered table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dessert in desserts %}
+            <tr>
+                <td>{{ dessert.id }}</td>
+                <td>{{ dessert.name }}</td>
+                <td>{{ dessert.description }}</td>
+                <td>{{ dessert.price }}</td>
+                <td>
+                    <a href="{{ path('app_dessert_show', {'id': dessert.id}) }}" class="btn btn-primary btn-sm">Show</a>
+                    <a href="{{ path('app_dessert_edit', {'id': dessert.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

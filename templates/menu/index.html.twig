@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu Index{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Menu Index</h1>
+
+    <a href="{{ path('app_menu_new') }}" class="btn btn-success mb-3">Create New Menu</a>
+
+    <table class="table table-bordered table-striped table-dark">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for menu in menus %}
+                <tr>
+                    <td>{{ menu.id }}</td>
+                    <td>{{ menu.title }}</td>
+                    <td>{{ menu.description }}</td>
+                    <td>{{ menu.price }}</td>
+                    <td>
+                        <a href="{{ path('app_menu_show', {'id': menu.id}) }}" class="btn btn-primary btn-sm">Show</a>
+                        <a href="{{ path('app_menu_edit', {'id': menu.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
