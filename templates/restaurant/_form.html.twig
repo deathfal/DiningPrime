@@ -1,0 +1,30 @@
+<div class="container mt-4">
+    <div class="card bg-dark text-light shadow-lg">
+        <div class="card-header">
+            <h2 class="card-title mb-0">{{ button_label|default('Save') }} Restaurant</h2>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(form.address, 'Address', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.phoneNumber, 'Phone Number', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
