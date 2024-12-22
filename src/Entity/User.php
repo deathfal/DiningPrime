@@ -147,7 +147,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->isVerified;
     }
 
-    public function setVerified(bool $isVerified): static
+    // public function setVerified(bool $isVerified): static
+    // {
+    //     $this->isVerified = $isVerified;
+
+    //     return $this;
+    // }
+
+    // The method "isVerified" in class "App\Entity\User" requires 0 arguments, but should accept only 1.. Make the property public, add a setter, or set the "mapped" field option in the form type to be false.
+    public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
 
