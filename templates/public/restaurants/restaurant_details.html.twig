@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ restaurant.name }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ restaurant.name }}</h1>
+    <p><strong>Address:</strong> {{ restaurant.address }}</p>
+    <p><strong>Phone:</strong> {{ restaurant.phoneNumber }}</p>
+    <a href="{{ path('app_home') }}" class="btn btn-secondary">Back to Restaurants</a>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ restaurant.name }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ restaurant.name }}</h1>
+    <p><strong>Address:</strong> {{ restaurant.address }}</p>
+    <p><strong>Phone:</strong> {{ restaurant.phoneNumber }}</p>
+
+    <h2 class="mt-4">Menu</h2>
+    <div class="row">
+        {% for menu in restaurant.menus %}
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ menu.title }}</h5>
+                        <p class="card-text">{{ menu.description }}</p>
+                        <p><strong>Price:</strong> {{ menu.price }}</p>
+                        <h6>Dishes</h6>
+                        <ul>
+                            {% for dish in menu.dishes %}
+                                <li>{{ dish.name }} - {{ dish.price }}</li>
+                            {% endfor %}
+                        </ul>
+                        <h6>Desserts</h6>
+                        <ul>
+                            {% for dessert in menu.desserts %}
+                                <li>{{ dessert.name }} - {{ dessert.price }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No menus found for this restaurant.</p>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('app_home') }}" class="btn btn-secondary">Back to Restaurants</a>
+</div>
+{% endblock %}

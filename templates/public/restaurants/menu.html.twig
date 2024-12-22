@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu - {{ restaurant.name }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4 p-4 rounded" style="background-color: #f8f9fa;">
+    <h1 class="mb-4">{{ restaurant.name }} - Menu</h1>
+
+    {% if restaurant.menus|length > 0 %}
+        {% for menu in restaurant.menus %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ menu.title }}</h5>
+                    <p class="card-text">{{ menu.description }}</p>
+                    <p><strong>Price:</strong> {{ menu.price }}</p>
+                    
+                    <h6>Dishes:</h6>
+                    <ul>
+                        {% for dish in menu.dishes %}
+                            <li>{{ dish.name }} - {{ dish.price }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h6>Desserts:</h6>
+                    <ul>
+                        {% for dessert in menu.desserts %}
+                            <li>{{ dessert.name }} - {{ dessert.price }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No menus available for this restaurant.</p>
+    {% endif %}
+
+    <a href="{{ path('app_public_restaurant_show', {'id': restaurant.id}) }}" class="btn btn-secondary mt-4">Back to {{ restaurant.name }}</a>
+</div>
+{% endblock %}
